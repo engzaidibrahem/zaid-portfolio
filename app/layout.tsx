@@ -40,6 +40,10 @@ export const metadata: Metadata = {
     "Backend",
     "Zaid Ibrahem",
   ],
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
     title: "Zaid Ibrahem — Full-Stack Engineer & Product Builder",
     description:
