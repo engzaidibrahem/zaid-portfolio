@@ -46,7 +46,7 @@ Edit `lib/site.ts` for contact links:
 
 ```ts
 export const siteConfig = {
-  email: "you@gmail.com",
+  email: "engzaid386@gmail.com",
   linkedin: "https://linkedin.com/in/your-handle",
   // ...
 } as const;
