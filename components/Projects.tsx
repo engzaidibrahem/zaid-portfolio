@@ -169,21 +169,27 @@ export function Projects() {
                       </div>
 
                       <div className="mt-7 flex flex-wrap gap-3">
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                        >
-                          {t.projects.live}
-                          <ArrowUpRight size={15} aria-hidden />
-                        </a>
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                          >
+                            {t.projects.live}
+                            <ArrowUpRight size={15} aria-hidden />
+                          </a>
+                        )}
                         {project.githubUrl && (
                           <a
                             href={project.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="focus-ring inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-accent/35 hover:bg-white/[0.03]"
+                            className={`focus-ring inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-transform hover:scale-[1.02] active:scale-[0.98] ${
+                              project.liveUrl
+                                ? "border border-border text-foreground transition-colors hover:border-accent/35 hover:bg-white/[0.03]"
+                                : "bg-accent text-accent-foreground"
+                            }`}
                           >
                             <GithubIcon size={15} />
                             {t.projects.github}

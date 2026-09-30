@@ -1,4 +1,20 @@
-export const projectMeta = [
+export type ProjectMeta = {
+  id: string;
+  number: string;
+  image: string;
+  liveUrl?: string;
+  githubUrl?: string;
+  stack: string[];
+  featured?: boolean;
+  copyKey:
+    | "indoform"
+    | "valley"
+    | "school"
+    | "gia"
+    | "managerGia";
+};
+
+export const projectMeta: ProjectMeta[] = [
   {
     id: "indoform",
     number: "01",
@@ -7,7 +23,7 @@ export const projectMeta = [
     githubUrl: "https://github.com/engzaidibrahem/IndoForm",
     stack: ["Django", "Django REST Framework", "PostgreSQL", "Docker"],
     featured: true,
-    copyKey: "indoform" as const,
+    copyKey: "indoform",
   },
   {
     id: "valley-order",
@@ -25,7 +41,7 @@ export const projectMeta = [
       "MySQL",
     ],
     featured: false,
-    copyKey: "valley" as const,
+    copyKey: "valley",
   },
   {
     id: "school",
@@ -37,7 +53,7 @@ export const projectMeta = [
       "https://github.com/engzaidibrahem/Integrated-School-Management-System",
     stack: ["Django", "Django REST Framework", "PostgreSQL", "React"],
     featured: false,
-    copyKey: "school" as const,
+    copyKey: "school",
   },
   {
     id: "gia",
@@ -47,9 +63,25 @@ export const projectMeta = [
     githubUrl: "https://github.com/engzaidibrahem/giamaharanigroup",
     stack: ["Next.js", "React", "Responsive Design"],
     featured: false,
-    copyKey: "gia" as const,
+    copyKey: "gia",
   },
-] as const;
+  {
+    id: "manager-gia",
+    number: "05",
+    image: "/projects/manager-gia.jpg",
+    githubUrl: "https://github.com/engzaidibrahem/manager-gia",
+    stack: [
+      "TypeScript",
+      "Node.js",
+      "PostgreSQL",
+      "Docker",
+      "pnpm",
+      "Nginx",
+    ],
+    featured: false,
+    copyKey: "managerGia",
+  },
+];
 
 export const capabilityIds = [
   "backend",

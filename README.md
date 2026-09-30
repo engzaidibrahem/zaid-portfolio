@@ -35,6 +35,7 @@ Place images in `public/projects/`:
 | `public/projects/delivery.jpg` | Valley Order |
 | `public/projects/school.jpg` | School Management |
 | `public/projects/gia.jpg` | Gia Maharani Group |
+| `public/projects/manager-gia.jpg` | Gia Shawarma Manager |
 
 Recommended size: **1600×1000** (or similar 16:10 / 16:9). JPG or PNG works. Replace the placeholder files with real screenshots — the site already points to these paths.
 

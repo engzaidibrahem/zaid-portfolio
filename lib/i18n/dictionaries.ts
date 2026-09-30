@@ -40,6 +40,7 @@ export type Dictionary = {
       valley: ProjectCopy;
       school: ProjectCopy;
       gia: ProjectCopy;
+      managerGia: ProjectCopy;
     };
   };
   capabilities: {
@@ -127,7 +128,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Selected work",
       title: "Systems shipped into the real world.",
       subtitle:
-        "Four production projects spanning SaaS commerce, logistics backends, multi-role business systems, and client delivery.",
+        "Five production projects spanning SaaS commerce, logistics backends, multi-role business systems, restaurant operations, and client delivery.",
       keyCapabilities: "Key capabilities",
       stack: "Stack",
       live: "Live project",
@@ -195,6 +196,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "Production Deployment",
           ],
         },
+        managerGia: {
+          category: "CLIENT PROJECT / OPERATIONS",
+          name: "Gia Shawarma Manager",
+          subtitle:
+            "Back-office system for restaurant operations, inventory, and staff workflows.",
+          description:
+            "A production management platform built for Gia Maharani Group. The monorepo connects a TypeScript API, PostgreSQL data layer, web dashboard, and warehouse mobile flows with role-based access for owners, managers, kitchen, cashier, and warehouse teams—designed for self-hosted deployment with Docker, Nginx, and VPS infrastructure.",
+          capabilities: [
+            "Operations Dashboard",
+            "Multi-Role Access",
+            "Inventory & Warehouse",
+            "API Architecture",
+            "Self-Hosting",
+            "Docker Deployment",
+            "Production Workflows",
+          ],
+        },
       },
     },
     capabilities: {
@@ -237,7 +255,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       p2: "My work ranges from SaaS platforms and e-commerce infrastructure to multi-vendor delivery systems and complex management applications. I enjoy turning ideas into products that people and businesses can actually use.",
       p3: "I'm currently based in Indonesia and available for remote, contract, freelance, and full-time opportunities with teams building ambitious products.",
       stats: [
-        { value: "4", label: "Selected Real-World Projects" },
+        { value: "5", label: "Selected Real-World Projects" },
         { value: "END-TO-END", label: "From Architecture to Deployment" },
         { value: "REMOTE", label: "Available Worldwide" },
       ],
@@ -291,7 +309,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "أعمال مختارة",
       title: "أنظمة وصلت إلى العالم الحقيقي.",
       subtitle:
-        "أربعة مشاريع إنتاجية تشمل تجارة SaaS، وباكند اللوجستيات، وأنظمة أعمال متعددة الأدوار، وتسليم مشاريع للعملاء.",
+        "خمسة مشاريع إنتاجية تشمل تجارة SaaS، وباكند اللوجستيات، وأنظمة أعمال متعددة الأدوار، وتشغيل المطاعم، وتسليم مشاريع للعملاء.",
       keyCapabilities: "القدرات الرئيسية",
       stack: "التقنيات",
       live: "المشروع المباشر",
@@ -359,6 +377,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "نشر إنتاجي",
           ],
         },
+        managerGia: {
+          category: "مشروع عميل / عمليات",
+          name: "Gia Shawarma Manager",
+          subtitle:
+            "نظام خلفي لإدارة عمليات المطعم والمخزون وسير عمل الفريق.",
+          description:
+            "منصة إدارة إنتاجية مبنية لـ Gia Maharani Group. يربط المستودع Monorepo بين API مكتوب بـ TypeScript، وطبقة بيانات PostgreSQL، ولوحة ويب، وتدفقات مخزن جوال مع صلاحيات حسب الدور للمالك والمدير والمطبخ والكاشير والمخزن—مصممة للنشر الذاتي عبر Docker وNginx وVPS.",
+          capabilities: [
+            "لوحة عمليات",
+            "صلاحيات متعددة الأدوار",
+            "المخزون والمستودع",
+            "هندسة API",
+            "استضافة ذاتية",
+            "نشر Docker",
+            "سير عمل إنتاجي",
+          ],
+        },
       },
     },
     capabilities: {
@@ -401,7 +436,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       p2: "يمتد عملي من منصات SaaS وبنية التجارة الإلكترونية إلى أنظمة التوصيل متعددة البائعين وتطبيقات الإدارة المعقدة. أستمتع بتحويل الأفكار إلى منتجات يستخدمها الناس والشركات فعلاً.",
       p3: "أقيم حالياً في إندونيسيا ومتاح لفرص العمل عن بُعد، والعقود، والعمل الحر، والدوام الكامل مع فرق تبني منتجات طموحة.",
       stats: [
-        { value: "4", label: "مشاريع واقعية مختارة" },
+        { value: "5", label: "مشاريع واقعية مختارة" },
         { value: "من البداية للنهاية", label: "من الهندسة إلى النشر" },
         { value: "عن بُعد", label: "متاح حول العالم" },
       ],
