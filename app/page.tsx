@@ -1,21 +1,21 @@
-import { About } from "@/components/About";
-import { Capabilities } from "@/components/Capabilities";
-import { Contact } from "@/components/Contact";
-import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
-import { Navbar } from "@/components/Navbar";
-import { Projects } from "@/components/Projects";
+import { AboutSection } from "@/components/site/AboutSection";
+import { CapabilitiesSection } from "@/components/site/CapabilitiesSection";
+import { ContactSection } from "@/components/site/ContactSection";
+import { Footer } from "@/components/site/Footer";
+import { Header } from "@/components/site/Header";
+import { Hero } from "@/components/site/Hero";
+import { WorkSection } from "@/components/site/WorkSection";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Header />
       <main>
         <Hero />
-        <Projects />
-        <Capabilities />
-        <About />
-        <Contact />
+        <WorkSection />
+        <CapabilitiesSection />
+        <AboutSection />
+        <ContactSection />
       </main>
       <Footer />
     </>

@@ -1,54 +1,43 @@
 import type { Metadata } from "next";
-import { DM_Sans, JetBrains_Mono, Noto_Sans_Arabic, Syne } from "next/font/google";
-import { Providers } from "@/components/Providers";
+import { IBM_Plex_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
-  variable: "--font-syne",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
 });
 
-const notoArabic = Noto_Sans_Arabic({
-  variable: "--font-arabic",
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
-});
-
 export const metadata: Metadata = {
-  title: "Zaid Ibrahem — Full-Stack Engineer & Product Builder",
+  metadataBase: new URL("https://zaid-portfolio-pied.vercel.app"),
+  title: {
+    default: "Zaid Ibrahem — SOFT STEP · Software Engineering",
+    template: "%s · Zaid Ibrahem",
+  },
   description:
-    "Full-Stack Engineer & Product Builder specializing in scalable backend systems, SaaS platforms, APIs, and real-world digital products.",
+    "Engineering digital products that move businesses forward. Backend systems, APIs, SaaS platforms, and complete business software by Zaid Ibrahem and SOFT STEP, Indonesia.",
   keywords: [
-    "Full-Stack Engineer",
+    "SOFT STEP",
+    "Zaid Ibrahem",
+    "Software Engineer",
+    "Full-Stack",
     "Django",
-    "FastAPI",
     "Next.js",
     "SaaS",
-    "Backend",
-    "Zaid Ibrahem",
+    "Indonesia",
   ],
-  icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }],
-    shortcut: "/favicon.ico",
-  },
   openGraph: {
-    title: "Zaid Ibrahem — Full-Stack Engineer & Product Builder",
+    title: "Zaid Ibrahem — SOFT STEP",
     description:
-      "I build systems that businesses use. Scalable backends, SaaS platforms, and production-ready products.",
+      "Engineering digital products that move businesses forward.",
     type: "website",
+    url: "https://zaid-portfolio-pied.vercel.app",
   },
 };
 
@@ -58,13 +47,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${syne.variable} ${dmSans.variable} ${jetbrains.variable} ${notoArabic.variable} h-full antialiased`}
-    >
-      <body className="min-h-full bg-background font-sans text-foreground">
-        <Providers>{children}</Providers>
+    <html lang="en" className={`${jakarta.variable} ${plexMono.variable} h-full`}>
+      <body className="min-h-full bg-background font-sans text-foreground antialiased">
+        {children}
       </body>
     </html>
   );
