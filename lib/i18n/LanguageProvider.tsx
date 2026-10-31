@@ -9,13 +9,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { dictionaries, type Dictionary, type Locale } from "@/lib/i18n/dictionaries";
+import { ui, type Locale, type UiCopy } from "@/lib/i18n/ui";
 
 type LanguageContextValue = {
   locale: Locale;
-  t: Dictionary;
+  t: UiCopy;
   dir: "ltr" | "rtl";
-  toggleLocale: () => void;
   setLocale: (locale: Locale) => void;
 };
 
@@ -28,9 +27,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved === "ar" || saved === "en") {
-      setLocaleState(saved);
-    }
+    if (saved === "ar" || saved === "en") setLocaleState(saved);
     setReady(true);
   }, []);
 
@@ -45,19 +42,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLocaleState(next);
   }, []);
 
-  const toggleLocale = useCallback(() => {
-    setLocaleState((prev) => (prev === "en" ? "ar" : "en"));
-  }, []);
-
   const value = useMemo<LanguageContextValue>(
     () => ({
       locale,
-      t: dictionaries[locale],
+      t: ui[locale],
       dir: locale === "ar" ? "rtl" : "ltr",
-      toggleLocale,
       setLocale,
     }),
-    [locale, toggleLocale, setLocale],
+    [locale, setLocale],
   );
 
   return (
@@ -67,8 +59,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
 export function useLanguage() {
   const ctx = useContext(LanguageContext);
-  if (!ctx) {
-    throw new Error("useLanguage must be used within LanguageProvider");
-  }
+  if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
   return ctx;
 }

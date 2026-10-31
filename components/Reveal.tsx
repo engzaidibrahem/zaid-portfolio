@@ -12,8 +12,8 @@ type RevealProps = {
 };
 
 const variants: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 32, scale: 0.98 },
+  visible: { opacity: 1, y: 0, scale: 1 },
 };
 
 export function Reveal({
@@ -39,7 +39,7 @@ export function Reveal({
         hidden: { opacity: 0, y },
         visible: { opacity: 1, y: 0 },
       }}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.72, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>

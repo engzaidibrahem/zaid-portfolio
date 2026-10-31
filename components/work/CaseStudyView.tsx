@@ -1,51 +1,77 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
-import type { CaseStudy } from "@/lib/case-studies";
 import { GithubIcon } from "@/components/icons";
+import { getCaseStudy } from "@/lib/case-studies";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 function Block({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="border-t border-border py-8 first:border-t-0 first:pt-0">
-      <h2 className="section-index">{title}</h2>
-      <div className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-[15px]">
+    <section className="border-t border-border pt-6 text-start">
+      <h2 className="section-tag">{title}</h2>
+      <div className="mt-3 text-sm leading-relaxed text-muted sm:text-[15px]">
         {children}
       </div>
     </section>
   );
 }
 
-export function CaseStudyView({ project }: { project: CaseStudy }) {
+export function CaseStudyView({ slug }: { slug: string }) {
+  const { locale, t } = useLanguage();
+  const project = getCaseStudy(slug, locale);
+  const c = t.caseStudy;
+
+  if (!project) {
+    return (
+      <p className="text-muted">
+        {locale === "ar" ? "المشروع غير موجود." : "Project not found."}
+      </p>
+    );
+  }
+
   return (
-    <article className="pb-8">
-      <Link
-        href="/#work"
-        className="link-underline focus-ring font-mono text-[11px] uppercase tracking-[0.16em] text-muted"
-      >
-        ← Work index
+    <article className="text-start">
+      <Link href="/#work" className="focus-ring text-xs text-muted hover:text-accent">
+        ← {c.back}
       </Link>
 
-      <header className="mt-10 max-w-3xl border-b border-border pb-10">
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-dim">
+      <header className="mt-8 max-w-2xl">
+        <p className="font-mono text-[10px] uppercase tracking-wider text-muted-dim">
           {project.category} · {project.number}
         </p>
-        <h1 className="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+        <h1 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
           {project.name}
         </h1>
-        <p className="mt-4 text-lg text-accent">{project.tagline}</p>
-        <p className="mt-4 text-muted">{project.summary}</p>
+        <p className="mt-3 text-base text-accent">{project.tagline}</p>
+        <p className="mt-4 text-sm leading-relaxed text-muted">{project.summary}</p>
 
-        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {project.capabilities.map((cap) => (
+            <li
+              key={cap}
+              className="rounded-md border border-border px-2 py-0.5 font-mono text-[10px] text-muted"
+            >
+              {cap}
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-4 font-mono text-[11px] text-muted-dim">
+          {project.stack.join(" · ")}
+        </p>
+
+        <div className="mt-5 flex flex-wrap gap-4 text-sm">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline focus-ring text-sm"
+              className="inline-flex items-center gap-1 text-accent"
             >
-              Live project
-              <ArrowUpRight size={14} className="inline" aria-hidden />
+              {c.live}
+              <ArrowUpRight size={12} aria-hidden />
             </a>
           )}
           {project.githubUrl && (
@@ -53,51 +79,25 @@ export function CaseStudyView({ project }: { project: CaseStudy }) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline focus-ring inline-flex items-center gap-2 text-sm text-muted"
+              className="inline-flex items-center gap-1 text-muted hover:text-foreground"
             >
               <GithubIcon size={14} />
-              Repository
+              {c.repo}
             </a>
           )}
         </div>
       </header>
 
-      <div className="mt-10 artifact-frame relative aspect-[16/10] max-w-4xl overflow-hidden sm:aspect-[16/9]">
-        <Image
-          src={project.image}
-          alt={project.imageAlt}
-          fill
-          className={`object-cover ${project.imagePosition === "top" ? "object-top" : "object-center"}`}
-          sizes="(max-width: 768px) 100vw, 896px"
-          priority
-        />
-      </div>
-
-      <ul className="mt-8 flex max-w-3xl flex-wrap gap-2">
-        {project.capabilities.map((cap) => (
-          <li
-            key={cap}
-            className="border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide text-muted"
-          >
-            {cap}
-          </li>
-        ))}
-      </ul>
-
-      <p className="mt-6 font-mono text-[11px] text-muted-dim">
-        {project.stack.join(" · ")}
-      </p>
-
-      <div className="mt-12 max-w-2xl">
-        <Block title="Overview">{project.overview}</Block>
-        <Block title="Problem">{project.problem}</Block>
-        <Block title="Solution">{project.solution}</Block>
-        <Block title="Architecture">{project.architecture}</Block>
-        <Block title="My contribution">{project.myContribution}</Block>
+      <div className="mt-10 max-w-2xl space-y-1">
+        <Block title={c.overview}>{project.overview}</Block>
+        <Block title={c.problem}>{project.problem}</Block>
+        <Block title={c.solution}>{project.solution}</Block>
+        <Block title={c.architecture}>{project.architecture}</Block>
+        <Block title={c.contribution}>{project.myContribution}</Block>
         {project.teamContribution && (
-          <Block title="Team / client">{project.teamContribution}</Block>
+          <Block title={c.team}>{project.teamContribution}</Block>
         )}
-        <Block title="Challenges">{project.challenges}</Block>
+        <Block title={c.challenges}>{project.challenges}</Block>
       </div>
     </article>
   );
