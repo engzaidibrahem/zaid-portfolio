@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <AmbientBackground />
       <Header />
-      <main>
+      <main className="overflow-x-clip">
         <Hero />
         <ScrollSection tone="mint">
           <WorkSection />

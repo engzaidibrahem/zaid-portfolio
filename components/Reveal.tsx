@@ -12,8 +12,8 @@ type RevealProps = {
 };
 
 const variants: Variants = {
-  hidden: { opacity: 0, y: 32, scale: 0.98 },
-  visible: { opacity: 1, y: 0, scale: 1 },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0 },
 };
 
 export function Reveal({

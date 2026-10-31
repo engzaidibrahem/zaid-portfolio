@@ -47,6 +47,7 @@ html[lang="ar"] body {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -54,6 +55,8 @@ body {
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
 }
 
 ::selection {
@@ -71,12 +74,31 @@ body {
 
 .aurora-band {
   position: absolute;
-  width: 140%;
+  width: 100%;
   height: 45%;
-  left: -20%;
+  left: 0;
   filter: blur(60px);
   opacity: 0.35;
   animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+@media (max-width: 767px) {
+  .aurora-band {
+    display: none;
+  }
+
+  .scan-line {
+    display: none;
+  }
+
+  .starfield-dot {
+    opacity: 0.35 !important;
+    animation: none;
+  }
+
+  .grid-motion {
+    opacity: 0.2 !important;
+  }
 }
 
 .aurora-band-a {
@@ -169,14 +191,72 @@ body {
 }
 
 .globe-hero-bg-size {
-  width: min(155vw, 46rem);
-  height: min(155vw, 46rem);
+  width: min(100vw, 46rem);
+  height: min(100vw, 46rem);
+  max-width: 100%;
   opacity: 0.95;
+}
+
+.globe-hero-mobile-size {
+  width: min(70vw, 16.5rem);
+  height: min(70vw, 16.5rem);
+  max-width: 100%;
+  opacity: 0.55;
 }
 
 .globe-hero-size {
   width: min(78vw, 22rem);
   height: min(78vw, 22rem);
+}
+
+.hero-globe-layer-mobile {
+  top: 3.5rem;
+  align-items: flex-start;
+  padding-top: 0.5rem;
+  opacity: 0.85;
+}
+
+.hero-readability-mobile {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 8, 16, 0.92) 0%,
+      rgba(5, 8, 16, 0.78) 38%,
+      rgba(5, 8, 16, 0.55) 58%,
+      rgba(5, 8, 16, 0.88) 100%
+    );
+}
+
+.hero-copy-panel-mobile {
+  position: relative;
+  padding: 1.25rem 1rem 1.5rem;
+  border-radius: 14px;
+  background: rgba(8, 14, 28, 0.88);
+  border: 1px solid rgba(120, 180, 255, 0.18);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 767px) {
+  .hero-title-solid-mobile {
+    background: none;
+    color: #f0f6ff;
+    -webkit-text-fill-color: #f0f6ff;
+  }
+}
+
+.globe-lite .globe-map {
+  animation-duration: 48s;
+}
+
+.globe-lite .globe-sphere-day {
+  box-shadow:
+    inset -12px -6px 24px rgba(15, 40, 80, 0.25),
+    0 0 40px rgba(96, 165, 250, 0.2);
+}
+
+.globe-stage {
+  max-width: 100%;
+  contain: layout paint;
 }
 
 .globe-sm-size {

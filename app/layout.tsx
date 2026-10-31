@@ -40,7 +40,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${space.variable} ${jetbrains.variable} ${notoArabic.variable} h-full`}
     >
-      <body className="min-h-full antialiased">
+      <body className="min-h-full overflow-x-clip antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>

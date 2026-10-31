@@ -5,10 +5,14 @@ import { globeMarkers, markerPosition } from "@/lib/globe-markers";
 
 type RotatingGlobeProps = {
   className?: string;
-  size?: "hero-bg" | "hero" | "sm";
+  size?: "hero-bg" | "hero-mobile" | "hero" | "sm";
+  /** Fewer animations for touch / low power devices */
+  lite?: boolean;
 };
 
-function GlobePins({ animate }: { animate: boolean }) {
+function GlobePins({ animate, show }: { animate: boolean; show: boolean }) {
+  if (!show) return null;
+
   return (
     <div className={`globe-pins ${animate ? "globe-pins-scroll" : "globe-pins-static"}`}>
       {globeMarkers.flatMap((m) => {
@@ -26,33 +30,39 @@ function GlobePins({ animate }: { animate: boolean }) {
   );
 }
 
-export function RotatingGlobe({ className = "", size = "hero" }: RotatingGlobeProps) {
+export function RotatingGlobe({
+  className = "",
+  size = "hero",
+  lite = false,
+}: RotatingGlobeProps) {
   const reduce = useReducedMotion();
-  const animate = !reduce;
+  const animate = !reduce && !lite;
   const dim =
     size === "hero-bg"
       ? "globe-hero-bg-size"
-      : size === "hero"
-        ? "globe-hero-size"
-        : "globe-sm-size";
+      : size === "hero-mobile"
+        ? "globe-hero-mobile-size"
+        : size === "hero"
+          ? "globe-hero-size"
+          : "globe-sm-size";
 
   return (
-    <div className={`globe-stage ${dim} ${className}`} aria-hidden>
-      <div className="globe-halo globe-halo-day" />
-      <div className="globe-orbit-ring" />
+    <div className={`globe-stage ${dim} ${lite ? "globe-lite" : ""} ${className}`} aria-hidden>
+      {!lite && <div className="globe-halo globe-halo-day" />}
+      {!lite && <div className="globe-orbit-ring" />}
       <motion.div
         className="globe-tilt"
-        animate={animate ? { rotateZ: [0, 1.5, 0, -1.5, 0] } : undefined}
+        animate={animate && !lite ? { rotateZ: [0, 1.5, 0, -1.5, 0] } : undefined}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       >
         <div className="globe-sphere globe-sphere-day">
           <div className={`globe-map globe-map-day ${animate ? "" : "globe-map-static"}`} />
-          <GlobePins animate={animate} />
+          <GlobePins animate={animate} show={!lite} />
           <div className="globe-shade globe-shade-day" />
-          <div className="globe-specular globe-specular-day" />
+          {!lite && <div className="globe-specular globe-specular-day" />}
         </div>
       </motion.div>
-      <div className="globe-floor-glow" />
+      {!lite && <div className="globe-floor-glow" />}
     </div>
   );
 }
