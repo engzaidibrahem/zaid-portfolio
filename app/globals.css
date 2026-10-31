@@ -160,17 +160,39 @@ body {
 
 .hero-readability {
   background:
-    radial-gradient(ellipse 50% 42% at 50% 38%, transparent 0%, rgba(5, 10, 20, 0.35) 100%),
-    linear-gradient(180deg, rgba(36, 59, 85, 0.08) 0%, rgba(5, 8, 16, 0.55) 100%);
+    radial-gradient(ellipse 55% 48% at 50% 36%, transparent 55%, rgba(5, 10, 20, 0.22) 100%),
+    linear-gradient(180deg, transparent 0%, rgba(5, 8, 16, 0.4) 100%);
 }
 
 .hero-globe-layer {
   top: -2%;
+  overflow: visible;
 }
 
-.hero-copy-panel-desktop {
+.hero-globe-layer > div {
+  overflow: visible;
+}
+
+.hero-copy-panel {
   position: relative;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.hero-copy-panel .section-tag,
+.hero-copy-panel .globe-caption,
+.hero-copy-panel p,
+.hero-copy-panel h1 span {
+  text-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.85),
+    0 0 32px rgba(0, 0, 0, 0.45);
+}
+
+.hero-copy-panel-over-globe {
+  margin-top: clamp(4.5rem, 22vw, 7.5rem);
+  padding: 0.5rem 0.25rem 1rem;
 }
 
 .hero-title-gradient {
@@ -199,34 +221,23 @@ body {
   width: min(100vw, 46rem);
   height: min(100vw, 46rem);
   max-width: 100%;
-  opacity: 0.95;
+  opacity: 0.72;
+  overflow: visible;
+  background: transparent;
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 0%,
+    #000 54%,
+    transparent 71%
+  );
+  mask-image: radial-gradient(circle at 50% 50%, #000 0%, #000 54%, transparent 71%);
 }
 
-.globe-hero-mobile-size {
-  width: min(82vw, 19rem);
-  height: min(82vw, 19rem);
-  max-width: 100%;
-  opacity: 1;
-}
+/* Globe size & placement match desktop — centered, soft mask edge */
 
 .globe-hero-size {
   width: min(78vw, 22rem);
   height: min(78vw, 22rem);
-}
-
-.hero-copy-panel-mobile {
-  position: relative;
-  padding: 1.1rem 1rem 1.35rem;
-  border-radius: 14px;
-  background: rgba(8, 14, 28, 0.72);
-  border: 1px solid rgba(120, 180, 255, 0.18);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(8px);
-}
-
-.hero-globe-inline {
-  width: 100%;
-  max-width: 100%;
 }
 
 @media (max-width: 767px) {
@@ -235,21 +246,24 @@ body {
     color: #f0f6ff;
     -webkit-text-fill-color: #f0f6ff;
   }
+
+  .hero-copy-panel-over-globe {
+    margin-top: clamp(4rem, 24vw, 6.5rem);
+  }
 }
 
 .globe-lite .globe-map {
-  animation-duration: 48s;
+  animation-duration: 40s;
 }
 
 .globe-lite .globe-sphere-day {
-  box-shadow:
-    inset -12px -6px 24px rgba(15, 40, 80, 0.25),
-    0 0 40px rgba(96, 165, 250, 0.2);
+  box-shadow: inset -12px -6px 24px rgba(15, 40, 80, 0.2);
 }
 
 .globe-stage {
   max-width: 100%;
-  contain: layout paint;
+  overflow: visible;
+  background: transparent;
 }
 
 .globe-sm-size {
@@ -313,6 +327,9 @@ body {
   height: 100%;
   transform: rotateX(14deg);
   transform-style: preserve-3d;
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .globe-sphere {
@@ -321,17 +338,14 @@ body {
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow:
-    inset -28px -12px 48px rgba(0, 8, 24, 0.85),
-    inset 16px 12px 32px rgba(120, 200, 255, 0.12),
-    0 0 60px rgba(45, 120, 255, 0.25);
+  background: transparent;
+  box-shadow: inset -28px -12px 48px rgba(0, 8, 24, 0.75);
 }
 
 .globe-sphere-day {
   box-shadow:
-    inset -20px -8px 36px rgba(15, 40, 80, 0.35),
-    inset 12px 10px 28px rgba(255, 255, 255, 0.25),
-    0 0 80px rgba(96, 165, 250, 0.35);
+    inset -18px -8px 32px rgba(15, 40, 80, 0.28),
+    inset 10px 8px 22px rgba(255, 255, 255, 0.18);
 }
 
 .globe-map {
@@ -343,10 +357,11 @@ body {
   background: url("/globe/earth.jpg") repeat-x center / 50% 100%;
   animation: globe-scroll 36s linear infinite;
   will-change: transform;
+  opacity: 0.88;
 }
 
 .globe-map-day {
-  filter: saturate(1.08) brightness(1.05);
+  filter: saturate(1.05) brightness(1.02);
 }
 
 .globe-pins {
@@ -429,12 +444,10 @@ body {
 }
 
 .globe-shade-day {
-  background: radial-gradient(
-    circle at 28% 24%,
-    rgba(255, 255, 255, 0.22) 0%,
-    transparent 48%
-  );
-  box-shadow: inset -24px -6px 40px rgba(20, 50, 90, 0.28);
+  background:
+    radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.18) 0%, transparent 48%),
+    radial-gradient(circle at 50% 50%, transparent 58%, rgba(5, 10, 22, 0.55) 100%);
+  box-shadow: inset -24px -6px 40px rgba(20, 50, 90, 0.22);
 }
 
 .globe-specular {
