@@ -44,7 +44,7 @@ export function Hero() {
               <RotatingGlobe size="hero-bg" lite={false} />
             </motion.div>
           ) : (
-            <RotatingGlobe size="hero-bg" lite={reduce} />
+            <RotatingGlobe size="hero-bg" lite={Boolean(reduce)} />
           )}
         </div>
       )}
