@@ -32,6 +32,7 @@ export function WorkSection() {
                     sizes="(max-width: 768px) 100vw, 320px"
                     className={`object-cover ${project.imagePosition === "top" ? "object-top" : "object-center"}`}
                     priority={project.highlight}
+                    loading={project.highlight ? undefined : "lazy"}
                   />
                 </div>
 

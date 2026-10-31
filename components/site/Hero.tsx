@@ -1,12 +1,17 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { RotatingGlobe } from "@/components/site/RotatingGlobe";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { useMobileLayout } from "@/lib/use-mobile";
 import { siteConfig } from "@/lib/site";
+
+const RotatingGlobe = dynamic(
+  () => import("@/components/site/RotatingGlobe").then((m) => m.RotatingGlobe),
+  { ssr: false, loading: () => <div className="globe-hero-bg-size globe-placeholder" aria-hidden /> },
+);
 
 export function Hero() {
   const { t } = useLanguage();
@@ -14,6 +19,23 @@ export function Hero() {
   const mobile = useMobileLayout();
   const sectionRef = useRef<HTMLElement>(null);
   const motionScroll = !reduce && !mobile;
+  const [showGlobe, setShowGlobe] = useState(!mobile);
+
+  useEffect(() => {
+    if (!mobile) {
+      setShowGlobe(true);
+      return;
+    }
+    let idleId: number | undefined;
+    const timeoutId = window.setTimeout(() => setShowGlobe(true), 150);
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(() => setShowGlobe(true), { timeout: 350 });
+    }
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+    };
+  }, [mobile]);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -24,7 +46,12 @@ export function Hero() {
   const globeY = useTransform(scrollYProgress, [0, 0.85], [0, -40]);
   const globeOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.2]);
 
-  const globe = <RotatingGlobe size="hero-bg" lite={false} />;
+  const globe =
+    showGlobe ? (
+      <RotatingGlobe size="hero-bg" lite={mobile} />
+    ) : (
+      <div className="globe-hero-bg-size globe-placeholder" aria-hidden />
+    );
 
   return (
     <section

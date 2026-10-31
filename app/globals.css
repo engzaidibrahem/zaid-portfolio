@@ -364,6 +364,35 @@ body {
   filter: saturate(1.05) brightness(1.02);
 }
 
+.globe-placeholder {
+  visibility: hidden;
+}
+
+.starfield-dot-static {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+}
+
+@media (max-width: 767px) {
+  .globe-map,
+  .globe-pins-scroll {
+    will-change: auto;
+  }
+
+  .globe-lite .globe-map {
+    animation-duration: 52s;
+  }
+
+  .globe-lite .globe-map-day {
+    filter: none;
+  }
+
+  .globe-hero-bg-size {
+    transform: translateZ(0);
+  }
+}
+
 .globe-pins {
   position: absolute;
   width: 200%;

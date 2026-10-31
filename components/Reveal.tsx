@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
+import { useMobileLayout } from "@/lib/use-mobile";
 
 type RevealProps = {
   children: ReactNode;
@@ -24,8 +25,9 @@ export function Reveal({
   once = true,
 }: RevealProps) {
   const reduceMotion = useReducedMotion();
+  const mobile = useMobileLayout();
 
-  if (reduceMotion) {
+  if (reduceMotion || mobile) {
     return <div className={className}>{children}</div>;
   }
 
@@ -56,8 +58,9 @@ export function Stagger({
   delay?: number;
 }) {
   const reduceMotion = useReducedMotion();
+  const mobile = useMobileLayout();
 
-  if (reduceMotion) {
+  if (reduceMotion || mobile) {
     return <div className={className}>{children}</div>;
   }
 

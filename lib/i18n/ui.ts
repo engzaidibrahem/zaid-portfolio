@@ -29,6 +29,7 @@ export type UiCopy = {
     subtitle: string;
     email: string;
     whatsapp: string;
+    whatsappPrefill: string;
     github: string;
   };
   footer: { projects: string; rights: string };
@@ -98,6 +99,8 @@ export const ui: Record<Locale, UiCopy> = {
       subtitle: "Backend, platform, or full product—remote-friendly.",
       email: "Email",
       whatsapp: "WhatsApp",
+      whatsappPrefill:
+        "Hi Zaid — I found your portfolio and I'd like to discuss a project or collaboration.",
       github: "GitHub",
     },
     footer: { projects: "All projects", rights: "Built from architecture to deployment." },
@@ -165,6 +168,7 @@ export const ui: Record<Locale, UiCopy> = {
       subtitle: "نظام خلفي، منصة، أو منتج كامل—العمل عن بُعد متاح.",
       email: "البريد الإلكتروني",
       whatsapp: "واتساب",
+      whatsappPrefill: "مرحباً زيد، تواصلت معك من موقعك الشخصي وأود مناقشة مشروع أو تعاون.",
       github: "GitHub",
     },
     footer: { projects: "كل المشاريع", rights: "من الهندسة إلى الإنتاج." },

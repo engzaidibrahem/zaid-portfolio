@@ -4,10 +4,11 @@ import { Mail, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { GithubIcon } from "@/components/icons";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, whatsappChatUrl } from "@/lib/site";
 
 export function ContactSection() {
   const { t } = useLanguage();
+  const whatsappHref = whatsappChatUrl(t.contact.whatsappPrefill);
 
   return (
     <section id="contact" className="scroll-mt-20 border-t border-border py-14 sm:py-18">
@@ -26,7 +27,7 @@ export function ContactSection() {
               {siteConfig.email}
             </a>
             <a
-              href={siteConfig.whatsappUrl}
+              href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               className="focus-ring panel inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold hover:border-accent/40"
