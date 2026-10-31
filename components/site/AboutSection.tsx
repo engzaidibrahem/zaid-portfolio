@@ -3,56 +3,42 @@
 import { Reveal } from "@/components/Reveal";
 import { siteConfig } from "@/lib/site";
 
-const stats = [
-  { value: String(6), label: "Documented product case studies" },
-  { value: "Full stack", label: "Backend through deployment" },
-  { value: "Indonesia", label: "Based · remote worldwide" },
-];
-
 export function AboutSection() {
-  const { person, company } = siteConfig;
+  const { person, background } = siteConfig;
 
   return (
-    <section id="about" className="scroll-mt-24 border-t border-border py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          <Reveal>
-            <p className="section-label">About</p>
-            <h2 className="mt-3 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.75rem]">
-              Practical engineering for products people rely on every day.
+    <section id="about" className="scroll-mt-20 border-t border-border">
+      <div className="mx-auto max-w-[90rem] px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <Reveal className="lg:col-span-5">
+            <p className="section-index">03 — About</p>
+            <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl">
+              Building software with architectural clarity.
             </h2>
-            <div className="mt-6 space-y-4 text-base leading-relaxed text-muted sm:text-[17px]">
+          </Reveal>
+
+          <Reveal className="lg:col-span-7" delay={0.06}>
+            <div className="space-y-5 text-base leading-relaxed text-muted sm:text-[17px]">
               <p>
-                I&apos;m {person.name}, a {person.role.toLowerCase()} and founder
-                of {company.name}—a software development company in Indonesia
-                focused on complete digital products for businesses.
+                I&apos;m {person.name}, a {person.role.toLowerCase()} focused on
+                backends, APIs, data layers, and the interfaces that make complex
+                systems usable. I care about how requirements translate into
+                structure—not just how features look in a demo.
               </p>
               <p>
-                {company.description} My work spans SaaS platforms, logistics
-                backends, education systems, restaurant operations, and
-                client-facing delivery—always with attention to architecture,
-                clarity, and maintainability.
+                My portfolio includes SaaS commerce, logistics platforms, school
+                management, and restaurant operations—projects where reliability,
+                permissions, and data integrity matter day to day.
               </p>
               <p>
-                I approach projects by connecting business requirements,
-                technical design, and user experience—so teams get systems they
-                can operate and extend—not fragile one-off builds.
+                I&apos;m also the founder of {background.company}.{" "}
+                {background.note}
+              </p>
+              <p className="font-mono text-sm text-muted-dim">
+                Based in Indonesia · available for remote engineering work
               </p>
             </div>
           </Reveal>
-
-          <div className="flex flex-col gap-4">
-            {stats.map((stat) => (
-              <Reveal key={stat.label} delay={0.05}>
-                <div className="card-surface px-6 py-5">
-                  <p className="font-display text-2xl font-bold sm:text-3xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1 text-sm text-muted">{stat.label}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </div>
     </section>

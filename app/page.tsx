@@ -1,9 +1,9 @@
 import { AboutSection } from "@/components/site/AboutSection";
-import { CapabilitiesSection } from "@/components/site/CapabilitiesSection";
 import { ContactSection } from "@/components/site/ContactSection";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
+import { StackSection } from "@/components/site/StackSection";
 import { WorkSection } from "@/components/site/WorkSection";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <main>
         <Hero />
         <WorkSection />
-        <CapabilitiesSection />
+        <StackSection />
         <AboutSection />
         <ContactSection />
       </main>

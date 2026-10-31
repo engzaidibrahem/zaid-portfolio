@@ -6,76 +6,99 @@ import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { caseStudies } from "@/lib/case-studies";
 
-function ProjectImage({
+function Artifact({
   src,
   alt,
   priority,
   position = "center",
+  tall,
 }: {
   src: string;
   alt: string;
   priority?: boolean;
   position?: "top" | "center";
+  tall?: boolean;
 }) {
   return (
-    <div className="image-frame relative aspect-[16/10] overflow-hidden sm:aspect-[16/9]">
+    <div
+      className={`artifact-frame relative overflow-hidden ${tall ? "aspect-[3/4] sm:aspect-[4/5]" : "aspect-[4/3] sm:aspect-[16/10]"}`}
+    >
       <Image
         src={src}
         alt={alt}
         fill
-        sizes="(max-width: 768px) 100vw, 60vw"
+        sizes="(max-width: 1024px) 100vw, 45vw"
         className={`object-cover ${position === "top" ? "object-top" : "object-center"}`}
         priority={priority}
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
     </div>
   );
 }
 
-function FeaturedProject({ slug }: { slug: string }) {
+function ProjectRow({
+  slug,
+  variant,
+}: {
+  slug: string;
+  variant: "feature" | "wide" | "compact";
+}) {
   const project = caseStudies.find((p) => p.slug === slug);
   if (!project) return null;
 
+  const isFeature = variant === "feature";
+  const reverse = project.number === "03" || project.number === "05";
+
   return (
     <Reveal>
-      <article className="card-surface overflow-hidden">
-        <div className="grid lg:grid-cols-2 lg:items-stretch">
-          <div className="order-2 flex flex-col justify-center p-6 sm:p-8 lg:order-1 lg:p-10">
-            <div className="flex items-center justify-between gap-3">
-              <span className="font-display text-6xl font-bold text-foreground/10">
+      <article className="border-t border-border py-10 sm:py-14 lg:py-16">
+        <div
+          className={`grid items-start gap-8 lg:gap-12 ${
+            isFeature
+              ? "lg:grid-cols-12"
+              : "lg:grid-cols-[1fr_1.1fr]"
+          } ${reverse && !isFeature ? "lg:[direction:rtl] lg:*:[direction:ltr]" : ""}`}
+        >
+          <div className={isFeature ? "lg:col-span-5" : ""}>
+            <div className="flex items-baseline gap-4">
+              <span className="font-display text-5xl font-bold text-foreground/15 sm:text-6xl">
                 {project.number}
               </span>
-              <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-muted">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-dim">
                 {project.category}
               </span>
             </div>
-            <h3 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            <h3
+              className={`mt-4 font-display font-bold tracking-tight ${
+                isFeature ? "text-3xl sm:text-4xl lg:text-5xl" : "text-2xl sm:text-3xl"
+              }`}
+            >
               {project.name}
             </h3>
-            <p className="mt-3 text-base font-medium text-accent">{project.tagline}</p>
-            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-[15px]">
+            <p className="mt-3 text-sm font-medium text-accent sm:text-base">
+              {project.tagline}
+            </p>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted sm:text-[15px]">
               {project.summary}
             </p>
-            <p className="mt-4 font-mono text-xs text-muted-dim">
+            <p className="mt-5 font-mono text-[10px] leading-relaxed text-muted-dim">
               {project.stack.join(" · ")}
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
               <Link
                 href={`/work/${project.slug}`}
-                className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-[#041018]"
+                className="link-underline focus-ring text-sm"
               >
-                View case study
-                <ArrowUpRight size={15} aria-hidden />
+                Case study
               </Link>
               {project.liveUrl && (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="focus-ring inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground hover:border-border-strong"
+                  className="link-underline focus-ring text-sm text-muted"
                 >
                   Live
-                  <ArrowUpRight size={15} aria-hidden />
+                  <ArrowUpRight size={14} className="inline" aria-hidden />
                 </a>
               )}
               {project.githubUrl && (
@@ -83,19 +106,21 @@ function FeaturedProject({ slug }: { slug: string }) {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="focus-ring inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground hover:border-border-strong"
+                  className="link-underline focus-ring text-sm text-muted"
                 >
                   GitHub
                 </a>
               )}
             </div>
           </div>
-          <div className="order-1 p-4 sm:p-5 lg:order-2 lg:p-6">
-            <ProjectImage
+
+          <div className={isFeature ? "lg:col-span-7" : ""}>
+            <Artifact
               src={project.image}
               alt={project.imageAlt}
-              priority
+              priority={project.highlight}
               position={project.imagePosition}
+              tall={isFeature && project.slug === "restaurant-inventory-dashboard"}
             />
           </div>
         </div>
@@ -104,67 +129,29 @@ function FeaturedProject({ slug }: { slug: string }) {
   );
 }
 
-function StandardProject({ slug, reverse }: { slug: string; reverse?: boolean }) {
-  const project = caseStudies.find((p) => p.slug === slug);
-  if (!project) return null;
-
-  return (
-    <Reveal>
-      <article className="card-surface grid gap-6 p-6 sm:p-7 lg:grid-cols-2 lg:items-center lg:gap-8">
-        <div className={reverse ? "lg:order-2" : ""}>
-          <div className="flex items-start justify-between gap-3">
-            <span className="font-display text-5xl font-bold text-foreground/10">
-              {project.number}
-            </span>
-            <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-muted">
-              {project.category}
-            </span>
-          </div>
-          <h3 className="mt-2 font-display text-2xl font-bold sm:text-3xl">
-            {project.name}
-          </h3>
-          <p className="mt-2 text-sm font-medium text-accent">{project.tagline}</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted">{project.summary}</p>
-          <Link
-            href={`/work/${project.slug}`}
-            className="focus-ring mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
-          >
-            View case study
-            <ArrowUpRight size={14} aria-hidden />
-          </Link>
-        </div>
-        <div className={reverse ? "lg:order-1" : ""}>
-          <ProjectImage src={project.image} alt={project.imageAlt} position={project.imagePosition} />
-        </div>
-      </article>
-    </Reveal>
-  );
-}
-
 export function WorkSection() {
   return (
-    <section id="work" className="scroll-mt-24 border-t border-border py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+    <section id="work" className="scroll-mt-20">
+      <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-10">
         <Reveal>
-          <p className="section-label">Selected work</p>
-          <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            Products built for real operations—not demos.
-          </h2>
-          <p className="mt-4 max-w-2xl text-muted sm:text-lg">
-            Case studies across SaaS, logistics, education, restaurant operations,
-            and client delivery—each with architecture, contribution, and live
-            evidence where available.
-          </p>
+          <div className="border-b border-border py-12 sm:py-16">
+            <p className="section-index">01 — Selected work</p>
+            <h2 className="mt-4 max-w-3xl font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.75rem]">
+              Engineering artifacts from production systems.
+            </h2>
+            <p className="mt-4 max-w-2xl text-muted">
+              Each entry links to a structured case study—problem, architecture,
+              contribution, and stack—without inflated claims.
+            </p>
+          </div>
         </Reveal>
 
-        <div className="mt-12 flex flex-col gap-8 lg:mt-16 lg:gap-10">
-          <FeaturedProject slug="restaurant-inventory-dashboard" />
-          <FeaturedProject slug="indoform" />
-          <StandardProject slug="valley-order" />
-          <StandardProject slug="school-management" reverse />
-          <StandardProject slug="gia-maharani" />
-          <StandardProject slug="gia-manager" reverse />
-        </div>
+        <ProjectRow slug="restaurant-inventory-dashboard" variant="feature" />
+        <ProjectRow slug="indoform" variant="feature" />
+        <ProjectRow slug="valley-order" variant="wide" />
+        <ProjectRow slug="school-management" variant="wide" />
+        <ProjectRow slug="gia-maharani" variant="compact" />
+        <ProjectRow slug="gia-manager" variant="compact" />
       </div>
     </section>
   );

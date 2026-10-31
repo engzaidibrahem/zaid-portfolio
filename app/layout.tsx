@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, Syne } from "next/font/google";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["500", "600", "700", "800"],
+});
+
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -17,25 +23,15 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://zaid-portfolio-pied.vercel.app"),
   title: {
-    default: "Zaid Ibrahem — SOFT STEP · Software Engineering",
+    default: "Zaid Ibrahem — Software Engineer",
     template: "%s · Zaid Ibrahem",
   },
   description:
-    "Engineering digital products that move businesses forward. Backend systems, APIs, SaaS platforms, and complete business software by Zaid Ibrahem and SOFT STEP, Indonesia.",
-  keywords: [
-    "SOFT STEP",
-    "Zaid Ibrahem",
-    "Software Engineer",
-    "Full-Stack",
-    "Django",
-    "Next.js",
-    "SaaS",
-    "Indonesia",
-  ],
+    "Personal portfolio of Zaid Ibrahem — software engineer focused on Python backends, APIs, databases, and full-stack digital products.",
   openGraph: {
-    title: "Zaid Ibrahem — SOFT STEP",
+    title: "Zaid Ibrahem — Software Engineer",
     description:
-      "Engineering digital products that move businesses forward.",
+      "Backend systems, APIs, and full-stack products built for real-world use.",
     type: "website",
     url: "https://zaid-portfolio-pied.vercel.app",
   },
@@ -47,9 +43,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${plexMono.variable} h-full`}>
-      <body className="min-h-full bg-background font-sans text-foreground antialiased">
-        {children}
+    <html lang="en" className={`${syne.variable} ${plexSans.variable} ${plexMono.variable} h-full`}>
+      <body className="page-shell min-h-full font-sans antialiased">
+        <div className="relative z-[1]">{children}</div>
       </body>
     </html>
   );

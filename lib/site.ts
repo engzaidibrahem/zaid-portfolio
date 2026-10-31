@@ -1,24 +1,23 @@
 export const siteConfig = {
   person: {
     name: "Zaid Ibrahem",
-    shortName: "Zaid",
-    role: "Software Engineer & Product Builder",
+    nameDisplay: "Zaid\nIbrahem",
+    role: "Software Engineer",
+    tagline: "Backend systems, APIs, databases & full-stack products",
   },
-  company: {
-    name: "SOFT STEP",
-    tagline: "Software development company · Indonesia",
-    description:
-      "SOFT STEP builds complete digital products and business systems for clients who need reliable engineering from architecture to deployment.",
+  background: {
+    company: "SOFT STEP",
+    note: "Founder of SOFT STEP — software development company in Indonesia. Client and product work is delivered through my engineering practice.",
   },
   email: "engzaid386@gmail.com",
   github: "https://github.com/engzaidibrahem",
-  linkedin: "https://linkedin.com/in/YOUR_LINKEDIN",
-  availability: "Available for remote & client projects",
+  availability: "Open to remote engineering & product work",
   hero: {
-    headline: "Engineering Digital Products That Move Businesses Forward.",
-    supporting:
-      "From complex backend systems and APIs to polished interfaces and complete business platforms, I build practical digital products designed around real-world needs.",
-    primaryCta: "Explore My Work",
-    secondaryCta: "Let's Discuss a Project",
+    statement:
+      "I design and ship software that holds up in production—APIs, data models, backends, and interfaces built as one coherent system.",
+    primaryCta: "View projects",
+    secondaryCta: "Contact",
   },
+  stackLine:
+    "Python · Django · FastAPI · PostgreSQL · Redis · React · Next.js · Docker",
 } as const;
