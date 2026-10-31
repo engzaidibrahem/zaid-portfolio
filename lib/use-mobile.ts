@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-const QUERY = "(max-width: 767px), (hover: none) and (pointer: coarse)";
+const QUERY = "(max-width: 767px)";
 
-/** True on phones / coarse touch — used to trim heavy motion. */
 export function useMobileLayout() {
   const [mobile, setMobile] = useState(false);
 

@@ -160,12 +160,17 @@ body {
 
 .hero-readability {
   background:
-    radial-gradient(ellipse 90% 80% at 50% 40%, rgba(20, 40, 70, 0.2), rgba(5, 10, 20, 0.72) 70%),
-    linear-gradient(180deg, rgba(36, 59, 85, 0.15) 0%, rgba(5, 8, 16, 0.88) 100%);
+    radial-gradient(ellipse 50% 42% at 50% 38%, transparent 0%, rgba(5, 10, 20, 0.35) 100%),
+    linear-gradient(180deg, rgba(36, 59, 85, 0.08) 0%, rgba(5, 8, 16, 0.55) 100%);
 }
 
 .hero-globe-layer {
-  top: -4%;
+  top: -2%;
+}
+
+.hero-copy-panel-desktop {
+  position: relative;
+  padding: 0.5rem 0;
 }
 
 .hero-title-gradient {
@@ -198,10 +203,10 @@ body {
 }
 
 .globe-hero-mobile-size {
-  width: min(70vw, 16.5rem);
-  height: min(70vw, 16.5rem);
+  width: min(82vw, 19rem);
+  height: min(82vw, 19rem);
   max-width: 100%;
-  opacity: 0.55;
+  opacity: 1;
 }
 
 .globe-hero-size {
@@ -209,31 +214,19 @@ body {
   height: min(78vw, 22rem);
 }
 
-.hero-globe-layer-mobile {
-  top: 3.5rem;
-  align-items: flex-start;
-  padding-top: 0.5rem;
-  opacity: 0.85;
-}
-
-.hero-readability-mobile {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(5, 8, 16, 0.92) 0%,
-      rgba(5, 8, 16, 0.78) 38%,
-      rgba(5, 8, 16, 0.55) 58%,
-      rgba(5, 8, 16, 0.88) 100%
-    );
-}
-
 .hero-copy-panel-mobile {
   position: relative;
-  padding: 1.25rem 1rem 1.5rem;
+  padding: 1.1rem 1rem 1.35rem;
   border-radius: 14px;
-  background: rgba(8, 14, 28, 0.88);
+  background: rgba(8, 14, 28, 0.72);
   border: 1px solid rgba(120, 180, 255, 0.18);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(8px);
+}
+
+.hero-globe-inline {
+  width: 100%;
+  max-width: 100%;
 }
 
 @media (max-width: 767px) {

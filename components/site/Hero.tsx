@@ -22,7 +22,7 @@ export function Hero() {
 
   const globeScale = useTransform(scrollYProgress, [0, 0.8], [1, 1.08]);
   const globeY = useTransform(scrollYProgress, [0, 0.85], [0, -48]);
-  const globeOpacity = useTransform(scrollYProgress, [0, 0.85], [0.88, 0.12]);
+  const globeOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.15]);
 
   return (
     <section
@@ -30,28 +30,37 @@ export function Hero() {
       id="home"
       className="hero-shell relative min-h-[100svh] overflow-x-clip overflow-y-visible pt-20 pb-16 sm:pt-24 sm:pb-20"
     >
-      <div
-        className={`hero-readability pointer-events-none absolute inset-0 z-[1] ${mobile ? "hero-readability-mobile" : ""}`}
-        aria-hidden
-      />
+      {!mobile && (
+        <div className="hero-readability pointer-events-none absolute inset-0 z-[1]" aria-hidden />
+      )}
 
-      <div
-        className={`hero-globe-layer pointer-events-none absolute inset-0 z-0 flex items-center justify-center ${mobile ? "hero-globe-layer-mobile" : ""}`}
-      >
-        {motionScroll ? (
-          <motion.div
-            style={{ scale: globeScale, y: globeY, opacity: globeOpacity }}
-            className="flex items-center justify-center"
-          >
-            <RotatingGlobe size="hero-bg" lite={false} />
-          </motion.div>
-        ) : (
-          <RotatingGlobe size={mobile ? "hero-mobile" : "hero-bg"} lite={mobile} />
-        )}
-      </div>
+      {!mobile && (
+        <div className="hero-globe-layer pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
+          {motionScroll ? (
+            <motion.div
+              style={{ scale: globeScale, y: globeY, opacity: globeOpacity }}
+              className="flex items-center justify-center"
+            >
+              <RotatingGlobe size="hero-bg" lite={false} />
+            </motion.div>
+          ) : (
+            <RotatingGlobe size="hero-bg" lite={reduce} />
+          )}
+        </div>
+      )}
 
       <div className="relative z-[2] mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6">
-        <div className={`hero-copy-panel flex w-full max-w-3xl flex-col items-center text-center ${mobile ? "hero-copy-panel-mobile" : ""}`}>
+        {mobile && (
+          <div className="hero-globe-inline mb-5 flex justify-center">
+            <RotatingGlobe size="hero-mobile" lite />
+          </div>
+        )}
+
+        <div
+          className={`hero-copy-panel flex w-full max-w-3xl flex-col items-center text-center ${
+            mobile ? "hero-copy-panel-mobile" : "hero-copy-panel-desktop"
+          }`}
+        >
           <motion.p
             initial={reduce || mobile ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
